@@ -1,0 +1,91 @@
+#Linked list
+
+class Node: #definisikan kelas Node
+    def __init__ (self, data): #inisialisasi data dan referensi ke simpul berikutnya
+        self.data = data #beri nilai ke atribut data
+        self.next = None #beri nilai kosong ke atribut next
+
+class LinkedList: #definisikan kelas LinkedList
+    def __init__ (self): #inisialisasi kepala linked list
+        self.head = None #beri nilai kosong ke kepala linked list
+
+    def print (self): #definisikan fungsi print
+        current = self.head #mulai dari kepala linked list.
+        while current: #lakukan iterasi hingga mencapai akhir linked list
+            print (current.data, end = ' ') #cetak data dari simpul saat ini
+            current = current.next #pindah ke simpul berikutnya
+        print () #cetak baris baru
+
+    def insertAwal (self, data): #definisikan fungsi insert
+        new_node = Node(data) #buat node baru dari data yang diberikan
+        new_node.next = self.head
+        self.head = new_node
+
+    def insertTengah(self,node_awal, data):
+        if node_awal is None :
+            print("Tidak ada Node Awal")
+            new_node = Node (data)
+            new_node.next = node_awal.next
+            node_awal.next = new_node
+
+    def insertAkhir (self, data):
+        new_node = Node (data)
+        if self.head is None:
+            self.head = new_node
+        akhir = self.head
+        while (akhir.next):
+            akhir = akhir.next
+        akhir.next = new_node
+
+
+if __name__ == '__main__':
+    first = LinkedList()
+    first.head = Node(1)
+    second = Node(2)
+    third = Node(3)
+    fourth = Node(4)
+    fifth = Node(5)
+
+    first.head.next = second
+    second.next = third
+    third.next = fourth
+    fourth.next = fifth 
+
+linked_list = LinkedList() #inisialisasi linked list
+
+while True:  #loop supaya program berjalan terus
+    print ('\nMenu:\n1. View Linked List\n2. Insert data di awal\n3. Insert data di tengah\n4. Insert data di akhir\n5. Keluar') #tampilkan menu
+    pilihan = int (input('Masukkan pilihan Anda (input angka): ')) #minta user pilih menu
+    
+    if pilihan == 1: #jika user memilih menu cetak data
+        first.print() #panggil fungsi print
+
+    elif pilihan == 2: #jika user memilih menu tambah data
+        a = int (input('Jumlah data yang ingin dimasukkan di awal: ')) #minta user masukkan jumlah data yang ingin dimasukkan
+        while a != 0: #selama jumlah data yang diinput bukan 0
+            data = input ('\nMasukkan data yang ingin ditambahkan: ') #minta user masukkan data
+            first.insertAwal(data) #panggil fungsi insert
+            print (data, 'berhasil ditambahkan di awal.') #tampilkan pesan bahwa data berhasil ditambahkan
+            a -= 1 #kurangi jumlah data yang ingin diinput dengan 1
+    
+    elif pilihan == 3:
+        a = int(input("Jumlah data yang ingin dimasukkan di tengah: "))
+        while a != 0:
+            data = input("\nMasukkan data yang ingin ditambahkan: ")
+            third.insertTengah(data)
+            print(data, 'berhasil ditambahkan di tengah')
+            a -= 1
+    
+    elif pilihan == 4:
+        a = int(input("Jumlah data yang ingin dimasukkan di akhir: "))
+        while a!= 0:
+            data = input("\nMasukkan data yang ingin ditambahkan: ")
+            fifth.insertAkhir(data)
+            print(data, "Berhasil di tambahkan di akhir" )
+            a -= 1
+
+    elif pilihan == 5: #jika user memilih menu keluar
+        break #keluar dari loop
+    
+    else: #jika user memilih menu yang tidak tersedia
+        print ('\nPilihan tidak valid.') #tampilkan pesan bahwa pilihan tidak valid
